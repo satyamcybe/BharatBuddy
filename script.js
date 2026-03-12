@@ -12,7 +12,7 @@ let guides = JSON.parse(localStorage.getItem("guides")) || [
     speciality: "Heritage & Culture",
     rating: "5.0",
     bio: "19+ years guiding tourists through Rajasthan's palaces.",
-    avatar: "image1.png",
+    avatar: "images/image1.png",
     experience: "1 years"
   },
   {
@@ -22,7 +22,7 @@ let guides = JSON.parse(localStorage.getItem("guides")) || [
     speciality: "mountain specialist",
     rating: "4.8",
     bio: "Born and raised in Lisbon. I know every hidden alley!",
-    avatar: "image.png",
+    avatar: "images/image.png",
     experience: "2 years"
   },
   {
@@ -32,7 +32,7 @@ let guides = JSON.parse(localStorage.getItem("guides")) || [
     speciality: "Uttrayn",
     rating: "5.0",
     bio: "chai piyo biscuit khao.",
-    avatar: "image2.png",
+    avatar: "images/image2.png",
     experience: "12 years"
   }
   
