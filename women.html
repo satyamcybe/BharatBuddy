@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shakti — Women's Safety · BharatBuddy</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* Page-specific hero override for Shakti theme */
+    .shakti-page-hero {
+      min-height: 46vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 100px 7% 120px;
+      position: relative;
+      overflow: hidden;
+      background:
+        repeating-linear-gradient(0deg,   transparent 0, transparent 18px, rgba(181,36,90,0.06) 18px, rgba(181,36,90,0.06) 19px),
+        repeating-linear-gradient(90deg,  transparent 0, transparent 18px, rgba(181,36,90,0.06) 18px, rgba(181,36,90,0.06) 19px),
+        repeating-linear-gradient(45deg,  transparent 0, transparent 12px, rgba(181,36,90,0.03) 12px, rgba(181,36,90,0.03) 13px),
+        repeating-linear-gradient(-45deg, transparent 0, transparent 12px, rgba(181,36,90,0.03) 12px, rgba(181,36,90,0.03) 13px),
+        linear-gradient(160deg, #1a0810 0%, #2d0f1a 50%, #1a0810 100%);
+    }
+
+    .shakti-page-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 60px;
+      background: var(--bg);
+      clip-path: polygon(
+        0% 100%, 3% 0%, 6% 100%, 9% 0%, 12% 100%, 15% 0%, 18% 100%, 21% 0%,
+        24% 100%, 27% 0%, 30% 100%, 33% 0%, 36% 100%, 39% 0%, 42% 100%, 45% 0%,
+        48% 100%, 51% 0%, 54% 100%, 57% 0%, 60% 100%, 63% 0%, 66% 100%, 69% 0%,
+        72% 100%, 75% 0%, 78% 100%, 81% 0%, 84% 100%, 87% 0%, 90% 100%, 93% 0%,
+        96% 100%, 100% 0%, 100% 100%
+      );
+    }
+
+    .shakti-page-hero h1 {
+      font-family: 'Yatra One', serif;
+      font-size: clamp(36px, 6vw, 62px);
+      color: #fff;
+      letter-spacing: 3px;
+      text-shadow: 0 4px 20px rgba(181,36,90,0.6);
+      margin-bottom: 10px;
+    }
+
+    .shakti-page-hero h1 span { color: var(--lotus-pink, #f0a8b8); }
+
+    .shakti-page-hero .subtitle {
+      font-family: 'Tiro Devanagari Hindi', serif;
+      font-style: italic;
+      font-size: clamp(14px, 2.2vw, 18px);
+      color: rgba(240,168,184,0.85);
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+    }
+
+    .hero-shakti-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero-shakti-btns button,
+    .hero-shakti-btns a {
+      font-family: 'Lora', serif;
+      font-size: 13px;
+      font-weight: 600;
+     padding: 8px 14px;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 0;
+      transition: all 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+      text-decoration: none;
+    }
+
+    .btn-shakti-primary {
+      background: linear-gradient(135deg, #b5245a, #cc1a3a);
+      color: #fff;
+      border: 1.5px solid rgba(240,168,184,0.4);
+      box-shadow: 0 4px 20px rgba(181,36,90,0.4);
+    }
+
+    .btn-shakti-primary:hover {
+      background: linear-gradient(135deg, #cc2d68, #b5245a);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(181,36,90,0.55);
+    }
+
+    .btn-shakti-outline {
+      background: transparent;
+      color: rgba(240,168,184,0.9);
+      border: 1.5px solid rgba(240,168,184,0.35);
+    }
+
+    .btn-shakti-outline:hover {
+      background: rgba(181,36,90,0.2);
+      border-color: rgba(240,168,184,0.7);
+      color: #fff;
+    }
+
+    /* Feature pills row */
+    .shakti-features-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 32px 7% 0;
+      margin-bottom: 48px;
+    }
+
+    .shakti-feature-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: var(--surface);
+      border: 1px solid var(--shakti-border, rgba(181,36,90,0.22));
+      font-family: 'Lora', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--shakti, #b5245a);
+      cursor: pointer;
+      transition: all 0.35s ease;
+      box-shadow: 0 2px 10px rgba(181,36,90,0.08);
+    }
+
+    .shakti-feature-pill:hover {
+      background: var(--shakti-pale, #fdf0f4);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(181,36,90,0.18);
+    }
+
+    .shakti-feature-pill span { font-size: 18px; }
+
+    /* Stats bar */
+    .shakti-stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      background: var(--ink);
+      padding: 24px 7%;
+      margin-bottom: 0;
+      border-top: 3px solid;
+      border-image: linear-gradient(90deg, transparent, var(--shakti-mid, #cc2d68), var(--lotus-pink, #f0a8b8), var(--shakti-mid, #cc2d68), transparent) 1;
+    }
+
+    .shakti-stat {
+      text-align: center;
+      padding: 16px 36px;
+      border-right: 1px solid rgba(181,36,90,0.2);
+      flex: 1;
+      min-width: 130px;
+    }
+
+    .shakti-stat:last-child { border-right: none; }
+
+    .shakti-stat-number {
+      font-family: 'Yatra One', serif;
+      font-size: 30px;
+      color: var(--lotus-pink, #f0a8b8);
+      display: block;
+      line-height: 1.1;
+    }
+
+    .shakti-stat-label {
+      font-family: 'Lora', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: rgba(200,150,90,0.6);
+      letter-spacing: 0.5px;
+    }
+
+    /* Main section wrapper */
+    .shakti-section { padding: 60px 7%; }
+
+    /* Responsive nav highlight */
+    nav a[href="women.html"] { color: var(--lotus-pink, #f0a8b8) !important; }
+
+    @media (max-width: 640px) {
+      .shakti-features-row { padding: 24px 5% 0; gap: 8px; }
+      .shakti-feature-pill { padding: 10px 14px; font-size: 12px; }
+      .shakti-stats { padding: 20px 5%; }
+      .shakti-stat { padding: 14px 20px; }
+      .shakti-section { padding: 48px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <header class="jali-bg">
+    <div class="logo-wrap">
+      <span class="logo-icon">🪔</span>
+      <h2>Bharat<span>Buddy</span></h2>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="guides.html">Guides</a>
+      <a href="places.html">Places</a>
+      <a href="services.html">Services</a>
+      <a href="women.html" class="active">Shakti</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ═══════════════ PAGE HERO ═══════════════ -->
+  <section class="shakti-page-hero">
+    <h1>🪷 <span>Shakti</span> · Women's Safety</h1>
+    <p class="subtitle">नारी शक्ति — Travel Fearlessly, Explore Freely</p>
+    <div class="hero-shakti-btns">
+      <button class="btn-shakti-primary" onclick="openShakti('sos')">🆘 Emergency SOS</button>
+      <button class="btn-shakti-primary" onclick="openShakti('guides')">👩 Female Guides</button>
+      <button class="btn-shakti-outline" onclick="openShakti('report')">📋 File Complaint</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════ STATS BAR ═══════════════ -->
+  <div class="shakti-stats">
+    <div class="shakti-stat">
+      <span class="shakti-stat-number">340+</span>
+      <span class="shakti-stat-label">Verified Female Guides</span>
+    </div>
+    <div class="shakti-stat">
+      <span class="shakti-stat-number">28</span>
+      <span class="shakti-stat-label">States Covered</span>
+    </div>
+    <div class="shakti-stat">
+      <span class="shakti-stat-number">12k+</span>
+      <span class="shakti-stat-label">Women Travellers Helped</span>
+    </div>
+    <div class="shakti-stat">
+      <span class="shakti-stat-number">24/7</span>
+      <span class="shakti-stat-label">Safety Helpline</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════ FEATURE PILLS ═══════════════ -->
+  <div class="shakti-features-row">
+    <button class="shakti-feature-pill" onclick="openShakti('sos')">
+      <span>🚨</span> Emergency Contacts
+    </button>
+    <button class="shakti-feature-pill" onclick="openShakti('guides')">
+      <span>👩‍💼</span> Book Female Guide
+    </button>
+    <button class="shakti-feature-pill" onclick="openShakti('report')">
+      <span>📝</span> File a Complaint
+    </button>
+    <button class="shakti-feature-pill" onclick="openShakti('tips')">
+      <span>🛡️</span> Safety Tips
+    </button>
+    <button class="shakti-feature-pill" onclick="openShakti('community')">
+      <span>🤝</span> Community
+    </button>
+  </div>
+
+  <!-- ═══════════════ FLOATING FAB ═══════════════ -->
+  <div class="shakti-fab" onclick="openShakti('sos')">
+    <button class="shakti-fab-btn" aria-label="Open Shakti Women Safety Panel">🪷</button>
+    <span class="shakti-fab-label">Shakti</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       SHAKTI MODAL
+  ═══════════════════════════════════════════════ -->
+  <div class="shakti-overlay" id="shaktiOverlay" onclick="handleOverlayClick(event)">
+    <div class="shakti-modal" id="shaktiModal">
+
+      <!-- Header -->
+      <div class="shakti-header">
+        <div class="shakti-header-inner">
+          <div class="shakti-header-title">
+            <div class="shakti-emblem">🪷</div>
+            <div>
+              <h2>Shakti — Women's Safety</h2>
+              <p>नारी शक्ति · Verified · Trusted · Safe</p>
+            </div>
+          </div>
+          <button class="shakti-close" onclick="closeShakti()" aria-label="Close">✕</button>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="shakti-tabs" role="tablist">
+        <button class="shakti-tab active" onclick="switchTab('sos',this)" role="tab">🚨 SOS &amp; Contacts</button>
+        <button class="shakti-tab" onclick="switchTab('guides',this)" role="tab">👩‍💼 Female Guides</button>
+        <button class="shakti-tab" onclick="switchTab('report',this)" role="tab">📋 File Complaint</button>
+        <button class="shakti-tab" onclick="switchTab('tips',this)" role="tab">🛡️ Safety Tips</button>
+        <button class="shakti-tab" onclick="switchTab('community',this)" role="tab">🤝 Community</button>
+      </div>
+
+      <!-- ═══ BODY ═══ -->
+      <div class="shakti-body">
+
+        <!-- ──────────── TAB 1: SOS & EMERGENCY ──────────── -->
+        <div class="shakti-panel active" id="panel-sos">
+
+          <button class="sos-btn" onclick="triggerSOS()">
+            🚨 SEND EMERGENCY SOS
+            <span class="sos-sub">— Share your live location with emergency contacts</span>
+          </button>
+
+          <div class="safety-banner">
+            <div class="safety-banner-icon">⚠️</div>
+            <div>
+              <h4>In immediate danger?</h4>
+              <p>Call <strong>112</strong> (National Emergency) immediately. Stay on the line. Your call can be tracked even without GPS. For Women's helpline call <strong>1091</strong>. All calls are free from any phone in India.</p>
+            </div>
+          </div>
+
+          <h3 class="shakti-section-title">📞 Emergency Numbers — India</h3>
+
+          <div class="police-grid">
+
+            <div class="police-card">
+              <div class="police-icon">🚨</div>
+              <div class="police-card-info">
+                <div class="police-label">National Emergency</div>
+                <span class="police-number">112</span>
+                <div class="police-desc">Police · Fire · Ambulance (All-in-one)</div>
+                <a href="tel:112" class="call-btn">📞 Call Now</a>
+              </div>
+            </div>
+
+            <div class="police-card">
+              <div class="police-icon">👮‍♀️</div>
+              <div class="police-card-info">
+                <div class="police-label">Women's Helpline</div>
+                <span class="police-number">1091</span>
+                <div class="police-desc">Dedicated women's safety helpline, 24/7</div>
+                <a href="tel:1091" class="call-btn">📞 Call Now</a>
+              </div>
+            </div>
+
+            <div class="police-card">
+              <div class="police-icon">🚔</div>
+              <div class="police-card-info">
+                <div class="police-label">Police</div>
+                <span class="police-number">100</span>
+                <div class="police-desc">Direct police emergency line</div>
+                <a href="tel:100" class="call-btn">📞 Call Now</a>
+              </div>
+            </div>
+
+            <div class="police-card">
+              <div class="police-icon">🚑</div>
+              <div class="police-card-info">
+                <div class="police-label">Ambulance</div>
+                <span class="police-number">108</span>
+                <div class="police-desc">Free emergency ambulance service</div>
+                <a href="tel:108" class="call-btn">📞 Call Now</a>
+              </div>
+            </div>
+
+            <div class="police-card">
+              <div class="police-icon">⚖️</div>
+              <div class="police-card-info">
+                <div class="police-label">NCW Helpline</div>
+                <span class="police-number">7827-170-170</span>
+                <div class="police-desc">National Commission for Women</div>
+                <a href="tel:7827170170" class="call-btn">📞 Call Now</a>
+              </div>
+            </div>
+
+            <div class="police-card">
+              <div class="police-icon">🏠</div>
+              <div class="police-card-info">
+                <div class="police-label">Domestic Violence</div>
+                <span class="police-number">181</span>
+                <div class="police-desc">Women's One Stop Crisis Centre</div>
+                <a href="tel:181" class="call-btn">📞 Call Now</a>
+              </div>
+            </div>
+
+            <div class="police-card">
+              <div class="police-icon">👧</div>
+              <div class="police-card-info">
+                <div class="police-label">Child Helpline</div>
+                <span class="police-number">1098</span>
+                <div class="police-desc">CHILDLINE — children in distress</div>
+                <a href="tel:1098" class="call-btn">📞 Call Now</a>
+              </div>
+            </div>
+
+            <div class="police-card">
+              <div class="police-icon">🛡️</div>
+              <div class="police-card-info">
+                <div class="police-label">Cyber Crime</div>
+                <span class="police-number">1930</span>
+                <div class="police-desc">National Cyber Crime Helpline</div>
+                <a href="tel:1930" class="call-btn">📞 Call Now</a>
+              </div>
+            </div>
+
+          </div><!-- /police-grid -->
+
+          <div class="shakti-divider">🪷</div>
+
+          <h3 class="shakti-section-title">📍 Save Emergency Contacts for Your City</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:18px;">
+            <div class="form-group" style="flex:1;min-width:180px;margin:0;">
+              <label>Your Current City</label>
+              <select id="citySelect" onchange="loadCityContacts()">
+                <option value="">— Select City —</option>
+                <option>Delhi</option>
+                <option>Mumbai</option>
+                <option>Jaipur</option>
+                <option>Agra</option>
+                <option>Varanasi</option>
+                <option>Bangalore</option>
+                <option>Chennai</option>
+                <option>Kolkata</option>
+                <option>Hyderabad</option>
+                <option>Pune</option>
+              </select>
+            </div>
+          </div>
+          <div id="cityContactsBox" style="display:none;" class="safety-banner">
+            <div class="safety-banner-icon">📍</div>
+            <div id="cityContactsContent">
+              <h4 id="cityName"></h4>
+              <p id="cityDetails"></p>
+            </div>
+          </div>
+
+        </div><!-- /panel-sos -->
+
+
+        <!-- ──────────── TAB 2: FEMALE GUIDES ──────────── -->
+        <div class="shakti-panel" id="panel-guides">
+
+          <div class="female-guides-intro">
+            <div class="female-guides-intro-icon">👩‍🏛️</div>
+            <p>All female guides are <strong>government-certified, police-verified</strong>, and trained in first aid. Book with confidence — you travel, we protect.</p>
+          </div>
+
+          <div class="guide-filter-strip">
+            <button class="guide-filter-chip active" onclick="filterGuides('all',this)">All</button>
+            <button class="guide-filter-chip" onclick="filterGuides('heritage',this)">Heritage</button>
+            <button class="guide-filter-chip" onclick="filterGuides('adventure',this)">Adventure</button>
+            <button class="guide-filter-chip" onclick="filterGuides('spiritual',this)">Spiritual</button>
+            <button class="guide-filter-chip" onclick="filterGuides('food',this)">Food Tours</button>
+            <button class="guide-filter-chip" onclick="filterGuides('language',this)">Multi-lingual</button>
+          </div>
+
+          <div class="female-guide-grid" id="femaleGuideGrid">
+            <!-- Cards injected by JS -->
+          </div>
+
+          <div class="shakti-divider">🪷</div>
+
+          <div class="safety-banner">
+            <div class="safety-banner-icon">✅</div>
+            <div>
+              <h4>Want to become a Female Guide?</h4>
+              <p>Empower yourself — join our network of certified women travel guides. Training, certification support, and insurance provided.</p>
+            </div>
+          </div>
+          <button class="complaint-submit" style="margin-top:14px;" onclick="showToast('Application form opening soon — Namaste! 🙏')">
+            🌸 Apply as Female Guide
+          </button>
+
+        </div><!-- /panel-guides -->
+
+
+        <!-- ──────────── TAB 3: COMPLAINT / REPORT ──────────── -->
+        <div class="shakti-panel" id="panel-report">
+
+          <h3 class="shakti-section-title">📝 What would you like to report?</h3>
+
+          <div class="complaint-types">
+            <button class="complaint-type-btn" onclick="selectComplaint(this,'Harassment')" data-type="Harassment">
+              <span class="complaint-type-icon">😤</span>
+              <span class="complaint-type-label">Harassment</span>
+            </button>
+            <button class="complaint-type-btn" onclick="selectComplaint(this,'Guide Misconduct')" data-type="Guide Misconduct">
+              <span class="complaint-type-icon">🚫</span>
+              <span class="complaint-type-label">Guide Misconduct</span>
+            </button>
+            <button class="complaint-type-btn" onclick="selectComplaint(this,'Overcharging / Fraud')" data-type="Overcharging / Fraud">
+              <span class="complaint-type-icon">💸</span>
+              <span class="complaint-type-label">Overcharging</span>
+            </button>
+            <button class="complaint-type-btn" onclick="selectComplaint(this,'Unsafe Accommodation')" data-type="Unsafe Accommodation">
+              <span class="complaint-type-icon">🏨</span>
+              <span class="complaint-type-label">Unsafe Stay</span>
+            </button>
+            <button class="complaint-type-btn" onclick="selectComplaint(this,'Transport Safety')" data-type="Transport Safety">
+              <span class="complaint-type-icon">🚗</span>
+              <span class="complaint-type-label">Transport Safety</span>
+            </button>
+            <button class="complaint-type-btn" onclick="selectComplaint(this,'Other')" data-type="Other">
+              <span class="complaint-type-icon">📌</span>
+              <span class="complaint-type-label">Other</span>
+            </button>
+          </div>
+
+          <div class="complaint-form-wrap">
+            <h4>📝 <span id="complaintTypeLabel">Select a category above, then fill details</span></h4>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" id="complainantName" placeholder="Full name (kept confidential)"/>
+              </div>
+              <div class="form-group">
+                <label>Contact Number</label>
+                <input type="tel" id="complainantPhone" placeholder="+91 — for follow-up"/>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Date of Incident</label>
+                <input type="date" id="incidentDate"/>
+              </div>
+              <div class="form-group">
+                <label>Location / City</label>
+                <input type="text" id="incidentLocation" placeholder="Where did this happen?"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Describe the Incident</label>
+              <textarea id="incidentDesc" placeholder="Please describe what happened. All reports are treated with full confidentiality…"></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Person / Place Involved (if known)</label>
+                <input type="text" id="incidentPerson" placeholder="Name, ID, or registration number"/>
+              </div>
+              <div class="form-group">
+                <label>Evidence (Photo / Video)</label>
+                <input type="file" id="incidentFile" accept="image/*,video/*"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Report anonymously?</label>
+              <select id="anonymous">
+                <option value="no">No — I want to be contacted for follow-up</option>
+                <option value="yes">Yes — keep my identity confidential</option>
+              </select>
+            </div>
+
+            <button class="complaint-submit" onclick="submitComplaint()">
+              🛡️ Submit Complaint Securely
+            </button>
+          </div>
+
+          <!-- Status tracker -->
+          <h3 class="shakti-section-title" style="margin-top:28px;">🔍 Track Your Complaint</h3>
+          <div class="form-row" style="margin-bottom:14px;">
+            <div class="form-group">
+              <label>Complaint Reference ID</label>
+              <input type="text" id="trackId" placeholder="e.g. SK-2024-00123"/>
+            </div>
+            <div class="form-group" style="justify-content:flex-end;">
+              <label style="visibility:hidden;">Track</label>
+              <button class="complaint-submit" style="padding:12px;" onclick="trackComplaint()">🔍 Track Status</button>
+            </div>
+          </div>
+
+          <div class="complaint-status" id="statusTracker" style="display:none;">
+            <div class="status-step done">
+              <span class="status-step-num">①</span>
+              Received
+            </div>
+            <div class="status-step done">
+              <span class="status-step-num">②</span>
+              Verified
+            </div>
+            <div class="status-step active">
+              <span class="status-step-num">③</span>
+              Under Review
+            </div>
+            <div class="status-step">
+              <span class="status-step-num">④</span>
+              Action Taken
+            </div>
+            <div class="status-step">
+              <span class="status-step-num">⑤</span>
+              Resolved
+            </div>
+          </div>
+
+        </div><!-- /panel-report -->
+
+
+        <!-- ──────────── TAB 4: SAFETY TIPS ──────────── -->
+        <div class="shakti-panel" id="panel-tips">
+
+          <div class="safety-tips-grid">
+
+            <div class="safety-tip-card">
+              <span class="safety-tip-icon">📱</span>
+              <div class="safety-tip-title">Share Live Location</div>
+              <p class="safety-tip-text">Always share your live location with a trusted contact before starting any tour. WhatsApp Live Location or Google Maps sharing works perfectly.</p>
+            </div>
+
+            <div class="safety-tip-card">
+              <span class="safety-tip-icon">🆔</span>
+              <div class="safety-tip-title">Verify Your Guide's ID</div>
+              <p class="safety-tip-text">Always ask for government-issued tourism guide ID before beginning a tour. All BharatBuddy guides carry a verified digital badge.</p>
+            </div>
+
+            <div class="safety-tip-card">
+              <span class="safety-tip-icon">🌙</span>
+              <div class="safety-tip-title">Night Travel Safety</div>
+              <p class="safety-tip-text">Prefer pre-booked, verified cabs (Ola/Uber) for night travel. Avoid unmarked taxis. Share the cab details — number, driver name — with someone you trust.</p>
+            </div>
+
+            <div class="safety-tip-card">
+              <span class="safety-tip-icon">👗</span>
+              <div class="safety-tip-title">Dress for the Region</div>
+              <p class="safety-tip-text">Research local customs before visiting temples and rural areas. A light dupatta/scarf is useful in many heritage sites — it shows respect and keeps you comfortable.</p>
+            </div>
+
+            <div class="safety-tip-card">
+              <span class="safety-tip-icon">💊</span>
+              <div class="safety-tip-title">Carry a Basic Safety Kit</div>
+              <p class="safety-tip-text">A small bag with ID copies, basic medicines, a charged power bank, and a personal alarm whistle. Also install the <strong>Nirbhaya App</strong> or <strong>Himmat App</strong>.</p>
+            </div>
+
+            <div class="safety-tip-card">
+              <span class="safety-tip-icon">🏨</span>
+              <div class="safety-tip-title">Choose Safe Stays</div>
+              <p class="safety-tip-text">Book accommodations with 4+ star reviews specifically from women travellers. Look for properties that offer 24-hour front desk, lockers, and women-only floors.</p>
+            </div>
+
+            <div class="safety-tip-card">
+              <span class="safety-tip-icon">🗣️</span>
+              <div class="safety-tip-title">Trust Your Instincts</div>
+              <p class="safety-tip-text">If something feels wrong — a place, a person, a situation — trust your gut and leave immediately. You don't owe anyone an explanation for your comfort.</p>
+            </div>
+
+            <div class="safety-tip-card">
+              <span class="safety-tip-icon">💰</span>
+              <div class="safety-tip-title">Carry Limited Cash</div>
+              <p class="safety-tip-text">Use UPI / cards wherever possible. Carry only the cash you'll need for that day. Keep backup cards and emergency cash separately in your bag.</p>
+            </div>
+
+            <div class="safety-tip-card">
+              <span class="safety-tip-icon">📸</span>
+              <div class="safety-tip-title">Photography Safety</div>
+              <p class="safety-tip-text">Be aware of surroundings when photographing in crowded areas. Use a camera strap. In sensitive heritage areas, check photography rules before shooting.</p>
+            </div>
+
+          </div><!-- /safety-tips-grid -->
+
+          <div class="shakti-divider">🪷</div>
+
+          <!-- App Download -->
+          <div class="app-strip">
+            <div class="app-strip-text">
+              <h4>📱 Download Safety Apps</h4>
+              <p>Recommended by India's Ministry of Women & Child Development</p>
+            </div>
+            <div class="app-strip-btns">
+              <a href="#" class="app-dl-btn" onclick="showToast('Redirecting to Himmat App — Stay Safe! 🛡️')">
+                🛡️ Himmat App
+              </a>
+              <a href="#" class="app-dl-btn" onclick="showToast('Redirecting to Nirbhaya App — Stay Safe! 🛡️')">
+                💪 Nirbhaya App
+              </a>
+              <a href="#" class="app-dl-btn" onclick="showToast('Redirecting to iCall — Mental Support 🤍')">
+                🤍 iCall Support
+              </a>
+            </div>
+          </div>
+
+        </div><!-- /panel-tips -->
+
+
+        <!-- ──────────── TAB 5: COMMUNITY ──────────── -->
+        <div class="shakti-panel" id="panel-community">
+
+          <h3 class="shakti-section-title">🤝 Women Travellers' Stories</h3>
+
+          <div class="community-review">
+            <div class="review-header">
+              <div class="review-avatar">प</div>
+              <div>
+                <div class="review-name">Priya Sharma</div>
+                <div class="review-location">📍 Delhi → Jaipur solo trip</div>
+              </div>
+              <div class="guide-stars" style="margin-left:auto;font-size:13px;">★★★★★</div>
+            </div>
+            <p class="review-text">My female guide Sunita ji knew every nook of Amber Fort. She was not just a guide — she felt like a local aunt showing me her city. I felt completely safe throughout. The SOS feature gave my parents back home so much peace of mind.</p>
+          </div>
+
+          <div class="community-review">
+            <div class="review-header">
+              <div class="review-avatar">R</div>
+              <div>
+                <div class="review-name">Reem Al-Farsi</div>
+                <div class="review-location">📍 Oman → Varanasi solo pilgrimage</div>
+              </div>
+              <div class="guide-stars" style="margin-left:auto;font-size:13px;">★★★★★</div>
+            </div>
+            <p class="review-text">As a solo foreign woman visiting the ghats, I was nervous. BharatBuddy assigned me a certified female guide who spoke Arabic. She explained every ritual with such care. I filed a small complaint about an aggressive boat vendor — it was resolved within 24 hours!</p>
+          </div>
+
+          <div class="community-review">
+            <div class="review-header">
+              <div class="review-avatar">A</div>
+              <div>
+                <div class="review-name">Anika Bose</div>
+                <div class="review-location">📍 Kolkata → Rajasthan heritage tour</div>
+              </div>
+              <div class="guide-stars" style="margin-left:auto;font-size:13px;">★★★★☆</div>
+            </div>
+            <p class="review-text">The police contacts feature was a lifesaver when my bag was snatched near Pushkar. One tap and I had the local PCR number. The emergency team on BharatBuddy even helped me file the FIR online. Incredible support system!</p>
+          </div>
+
+          <div class="shakti-divider">🪷</div>
+
+          <!-- Share experience form -->
+          <div class="share-experience">
+            <h4>🌸 Share Your Experience</h4>
+            <div class="form-group" style="margin-bottom:12px;">
+              <label>Your Name</label>
+              <input type="text" id="reviewName" placeholder="How shall we call you?"/>
+            </div>
+            <div class="form-row" style="margin-bottom:12px;">
+              <div class="form-group">
+                <label>Trip Route</label>
+                <input type="text" id="reviewRoute" placeholder="e.g. Mumbai → Goa solo"/>
+              </div>
+              <div class="form-group">
+                <label>Rating</label>
+                <select id="reviewRating">
+                  <option>⭐⭐⭐⭐⭐ Excellent</option>
+                  <option>⭐⭐⭐⭐ Very Good</option>
+                  <option>⭐⭐⭐ Good</option>
+                  <option>⭐⭐ Fair</option>
+                  <option>⭐ Poor</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:14px;">
+              <label>Your Story</label>
+              <textarea id="reviewText" placeholder="Share your experience — your words inspire other women to travel fearlessly…" style="min-height:90px;"></textarea>
+            </div>
+            <button class="complaint-submit" onclick="submitReview()">
+              🌸 Share My Story
+            </button>
+          </div>
+
+        </div><!-- /panel-community -->
+
+      </div><!-- /shakti-body -->
+    </div><!-- /shakti-modal -->
+  </div><!-- /shakti-overlay -->
+
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="jali-bg">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <span class="footer-logo">Bharat<span>Buddy</span></span>
+        <p>Connecting travellers to the living heritage of ancient India — safely, authentically, respectfully.</p>
+        <div class="social-icons">
+         <a href="https://www.instagram.com/satyamchy21"><i class="fab fa-instagram"></i>📸</a>
+          <a href="https://www.linkedin.com/in/satyam100/"><i class="fab fa-linkedin"></i>💼</a>
+          <a href="https://discord.com/users/satyam_bot"><i class="fab fa-discord"></i>🎮</a>
+          <a href="https://www.youtube.com/@mathologico?si=n99-9lrDobxK70Ww"><i class="fab fa-youtube"></i>▶️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="guides.html">Find Guides</a>
+        <a href="places.html">Sacred Places</a>
+        <a href="services.html">Our Services</a>
+        <a href="women.html">Shakti — Women</a>
+      </div>
+      <div class="footer-col">
+        <h4>Shakti Safety</h4>
+        <a href="#" onclick="openShakti('sos')">Emergency SOS</a>
+        <a href="#" onclick="openShakti('guides')">Female Guides</a>
+        <a href="#" onclick="openShakti('report')">File Complaint</a>
+        <a href="#" onclick="openShakti('tips')">Safety Tips</a>
+        <a href="#" onclick="openShakti('community')">Community Stories</a>
+      </div>
+      <div class="footer-col">
+        <h4>Emergency</h4>
+        <a href="tel:112">🚨 112 — National Emergency</a>
+        <a href="tel:1091">👮‍♀️ 1091 — Women's Helpline</a>
+        <a href="tel:100">🚔 100 — Police</a>
+        <a href="tel:108">🚑 108 — Ambulance</a>
+        <a href="tel:181">🏠 181 — Domestic Violence</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      🪷 BharatBuddy — Nari Shakti Initiative · Every woman deserves to travel fearlessly · © 2024
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════ TOAST ═══════════════ -->
+  <div class="toast" id="toast"></div>
+
+
+  <!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+  <script>
+
+    /* ── Female Guide Data ── */
+    const femaleGuides = [
+      {
+        name: 'Sunita Rajput',
+        meta: 'Jaipur · 9 yrs experience',
+        specialties: ['Heritage', 'Mughal History', 'Hindi, English'],
+        rating: 4.9,
+        reviews: 312,
+        tags: ['heritage','language'],
+        emoji: '👩‍🏛️'
+      },
+      {
+        name: 'Meera Iyer',
+        meta: 'Varanasi · 7 yrs experience',
+        specialties: ['Spiritual', 'Ghats', 'Tamil, English, Hindi'],
+        rating: 4.8,
+        reviews: 245,
+        tags: ['spiritual','language'],
+        emoji: '🧘‍♀️'
+      },
+      {
+        name: 'Fatima Khan',
+        meta: 'Agra · 11 yrs experience',
+        specialties: ['Heritage', 'Taj Mahal', 'Urdu, English, Arabic'],
+        rating: 5.0,
+        reviews: 421,
+        tags: ['heritage','language'],
+        emoji: '🕌'
+      },
+      {
+        name: 'Pooja Nair',
+        meta: 'Kerala · 6 yrs experience',
+        specialties: ['Adventure', 'Backwaters', 'Malayalam, English'],
+        rating: 4.7,
+        reviews: 198,
+        tags: ['adventure','language'],
+        emoji: '🚣‍♀️'
+      },
+      {
+        name: 'Ananya Das',
+        meta: 'Kolkata · 5 yrs experience',
+        specialties: ['Food Tours', 'Street Food', 'Bengali, English'],
+        rating: 4.8,
+        reviews: 167,
+        tags: ['food','language'],
+        emoji: '🍛'
+      },
+      {
+        name: 'Devika Sharma',
+        meta: 'Delhi · 8 yrs experience',
+        specialties: ['Heritage', 'Old Delhi Walks', 'Hindi, English, French'],
+        rating: 4.9,
+        reviews: 289,
+        tags: ['heritage','food','language'],
+        emoji: '🏛️'
+      },
+      {
+        name: 'Lakshmi Pillai',
+        meta: 'Tamil Nadu · 10 yrs',
+        specialties: ['Spiritual', 'Temple Architecture', 'Tamil, English'],
+        rating: 4.9,
+        reviews: 334,
+        tags: ['spiritual','heritage'],
+        emoji: '🛕'
+      },
+      {
+        name: 'Rashida Begum',
+        meta: 'Hyderabad · 6 yrs experience',
+        specialties: ['Heritage', 'Nizami Culture', 'Telugu, Urdu, English'],
+        rating: 4.7,
+        reviews: 143,
+        tags: ['heritage','food','language'],
+        emoji: '👑'
+      }
+    ];
+
+    let currentFilter = 'all';
+
+    function renderGuides(filter) {
+      const grid = document.getElementById('femaleGuideGrid');
+      const filtered = filter === 'all'
+        ? femaleGuides
+        : femaleGuides.filter(g => g.tags.includes(filter));
+
+      grid.innerHTML = filtered.map(g => `
+        <div class="female-guide-card">
+          <div class="female-guide-img" style="font-size:60px;line-height:170px;text-align:center;">
+            ${g.emoji}
+            <div class="guide-verified">✔ Verified</div>
+          </div>
+          <div class="female-guide-body">
+            <div class="female-guide-name">${g.name}</div>
+            <div class="female-guide-meta">${g.meta}</div>
+            <div class="guide-specialties">
+              ${g.specialties.map(s => `<span class="guide-spec-tag">${s}</span>`).join('')}
+            </div>
+            <div class="guide-rating">
+              <span class="guide-stars">${'★'.repeat(Math.round(g.rating))}${'☆'.repeat(5-Math.round(g.rating))}</span>
+              <span>${g.rating} (${g.reviews} reviews)</span>
+            </div>
+            <button class="guide-book-btn" onclick="bookGuide('${g.name}')">
+              🌸 Book ${g.name.split(' ')[0]}
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterGuides(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll('.guide-filter-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      renderGuides(filter);
+    }
+
+    function bookGuide(name) {
+      showToast(`Booking request sent to ${name} 🌸 She will confirm within 2 hours.`);
+    }
+
+    /* ── Complaint handling ── */
+    let selectedComplaintType = '';
+
+    function selectComplaint(btn, type) {
+      document.querySelectorAll('.complaint-type-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedComplaintType = type;
+      document.getElementById('complaintTypeLabel').textContent = `Report: ${type}`;
+    }
+
+    function submitComplaint() {
+      const name  = document.getElementById('complainantName').value.trim();
+      const desc  = document.getElementById('incidentDesc').value.trim();
+      if (!desc) { showToast('Please describe the incident before submitting.', true); return; }
+      const refId = 'SK-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+      showToast(`✅ Complaint filed. Your Reference ID: ${refId}. We will act within 24 hours.`);
+      document.getElementById('trackId').value = refId;
+    }
+
+    function trackComplaint() {
+      const id = document.getElementById('trackId').value.trim();
+      if (!id.startsWith('SK-')) { showToast('Please enter a valid Reference ID (e.g. SK-2024-12345)', true); return; }
+      document.getElementById('statusTracker').style.display = 'flex';
+      showToast(`Tracking complaint ${id} — Status: Under Review 🔍`);
+    }
+
+    /* ── City emergency contacts ── */
+    const cityData = {
+      'Delhi':     { name: 'Delhi Emergency Contacts', details: 'PCR Van: 100 · Delhi Police Women Cell: 011-23490309 · Delhi Commission for Women: 011-23379181 · Safe Delhi App: Available on Play Store' },
+      'Mumbai':    { name: 'Mumbai Emergency Contacts', details: 'Mumbai Police: 100 · Women Helpline: 103 · Nirbhaya Squad: 8454999999 · Mumbai Police App: Available on Play Store' },
+      'Jaipur':    { name: 'Jaipur Emergency Contacts', details: 'Jaipur Police: 100 · Women Cell: 0141-2744000 · Tourist Police: 0141-2743070 · PCR Van: 100' },
+      'Agra':      { name: 'Agra Emergency Contacts', details: 'Agra Police: 100 · Tourist Police: 0562-2421204 · Women Cell: 0562-2422323 · SSP Office: 0562-2460101' },
+      'Varanasi':  { name: 'Varanasi Emergency Contacts', details: 'Varanasi Police: 100 · Tourist Police: 0542-2508020 · Women Cell: 0542-2204971 · Anti-Romeo Squad: 100' },
+      'Bangalore': { name: 'Bengaluru Emergency Contacts', details: 'Bengaluru Police: 100 · Women Helpline: 1091 · She Teams: 080-22943225 · Women Safety App: Suraksha' },
+      'Chennai':   { name: 'Chennai Emergency Contacts', details: 'Chennai Police: 100 · Women Helpline: 044-28592750 · All Women Police Station: 044-23452750' },
+      'Kolkata':   { name: 'Kolkata Emergency Contacts', details: 'Kolkata Police: 100 · Women Cell: 033-22505050 · Nirbhaya Helpline: 1090 · Tourist Police: 033-22143526' },
+      'Hyderabad': { name: 'Hyderabad Emergency Contacts', details: 'Hyderabad Police: 100 · SHE Teams: 040-27852209 · Women Safety Wing: 040-23320721 · Hawk Eye App: Play Store' },
+      'Pune':      { name: 'Pune Emergency Contacts', details: 'Pune Police: 100 · Women Cell: 020-26126222 · Tourist Police: 020-26128316 · Women Helpline: 1091' }
+    };
+
+    function loadCityContacts() {
+      const city = document.getElementById('citySelect').value;
+      const box  = document.getElementById('cityContactsBox');
+      if (!city) { box.style.display = 'none'; return; }
+      const data = cityData[city];
+      document.getElementById('cityName').textContent    = data.name;
+      document.getElementById('cityDetails').textContent = data.details;
+      box.style.display = 'flex';
+    }
+
+    /* ── SOS trigger ── */
+    function triggerSOS() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          pos => {
+            const lat = pos.coords.latitude.toFixed(5);
+            const lng = pos.coords.longitude.toFixed(5);
+            showToast(`🚨 SOS Sent! Location: ${lat}, ${lng} — Emergency contacts alerted. Calling 112 now.`);
+            setTimeout(() => { window.location.href = 'tel:112'; }, 1800);
+          },
+          () => {
+            showToast('🚨 SOS Alert sent! Please call 112 immediately if in danger.');
+            setTimeout(() => { window.location.href = 'tel:112'; }, 1800);
+          }
+        );
+      } else {
+        window.location.href = 'tel:112';
+      }
+    }
+
+    /* ── Community review submit ── */
+    function submitReview() {
+      const name = document.getElementById('reviewName').value.trim();
+      const text = document.getElementById('reviewText').value.trim();
+      if (!text) { showToast('Please write your experience before sharing.', true); return; }
+      showToast(`🌸 Thank you ${name || 'brave traveller'}! Your story will inspire thousands. Namaste 🙏`);
+      document.getElementById('reviewText').value = '';
+      document.getElementById('reviewName').value = '';
+    }
+
+    /* ── Modal open / close / tab switch ── */
+    function openShakti(tab) {
+      document.getElementById('shaktiOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      if (tab) {
+        const btn = document.querySelector(`.shakti-tab[onclick*="'${tab}'"]`);
+        if (btn) switchTab(tab, btn);
+      }
+    }
+
+    function closeShakti() {
+      document.getElementById('shaktiOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('shaktiOverlay')) closeShakti();
+    }
+
+    function switchTab(id, btn) {
+      document.querySelectorAll('.shakti-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.shakti-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('panel-' + id).classList.add('active');
+      btn.classList.add('active');
+      if (id === 'guides') renderGuides(currentFilter);
+    }
+
+    /* ── Toast ── */
+    function showToast(msg, isWarn) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.borderLeftColor = isWarn ? 'var(--fort-red)' : 'var(--shakti)';
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 4200);
+    }
+
+    /* ── Keyboard close ── */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeShakti();
+    });
+
+    /* ── Init ── */
+    renderGuides('all');
+
+  </script>
+</body>
+</html>

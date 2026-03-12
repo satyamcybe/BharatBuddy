@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinations — LocalGuide</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-wrap">
+      <a href="index.html"><span class="logo-icon">🪔</span></a>
+      <h2>Bharat<span>Buddy</span></h2>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="places.html" class="active">Destinations</a>
+      <a href="guides.html">Guides</a>
+      <a href="services.html">Services</a>
+      <a href="women.html">Shakti</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div style="display:flex; gap:10px;">
+      <button class="btn btn-outline" style="background:var(--green-pale); color:var(--green); border:none;" onclick="openModal('touristModal')">I'm a Tourist</button>
+      <button class="btn btn-green" onclick="openModal('guideModal')">Become a Guide</button>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="section-label" style="color:var(--gold-light);">Explore the World</div>
+    <h1>Global Destinations</h1>
+    <p>Discover handpicked places with local insights — languages, food, culture, and more.</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search a city or country..." oninput="filterSearch()">
+      <button onclick="filterSearch()">🔍 Search</button>
+    </div>
+  </section>
+
+  <!-- FILTERS + PLACES -->
+  <section class="section">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:20px;">
+      <div class="filter-tabs" id="filterTabs" style="margin-bottom:0;">
+        <button class="filter-tab active" data-filter="All">🌐 All</button>
+        <button class="filter-tab" data-filter="Asia">🌏 Asia</button>
+        <button class="filter-tab" data-filter="Europe">🌍 Europe</button>
+        <button class="filter-tab" data-filter="Africa">🏜️ Africa</button>
+        <button class="filter-tab" data-filter="Americas">🌎 Americas</button>
+        <button class="filter-tab" data-filter="Oceania">🐨 Oceania</button>
+      </div>
+      <button class="btn btn-green" onclick="openModal('addPlaceModal')">+ Add Destination</button>
+    </div>
+
+    <div class="card-grid" id="placesGrid"></div>
+  </section>
+
+  <!-- PLACE DETAIL MODAL -->
+  <div class="modal-overlay" id="placeDetailModal">
+    <div class="modal" style="max-width:560px;">
+      <div class="modal-header">
+        <h3 id="modalPlaceName">Place Name</h3>
+        <button class="modal-close" onclick="closeModal('placeDetailModal')">✕</button>
+      </div>
+      <img id="modalPlaceImg" class="place-modal-img" src="" alt="">
+      <p id="modalPlaceDesc" style="color:var(--muted); font-size:15px; margin-bottom:16px;"></p>
+      <div class="place-detail-grid">
+        <div class="detail-box">
+          <div class="label">🗣️ Language</div>
+          <div class="value" id="modalLang"></div>
+        </div>
+        <div class="detail-box">
+          <div class="label">💰 Currency</div>
+          <div class="value" id="modalCurrency"></div>
+        </div>
+        <div class="detail-box">
+          <div class="label">☀️ Best Time to Visit</div>
+          <div class="value" id="modalBestTime"></div>
+        </div>
+        <div class="detail-box">
+          <div class="label">🍽️ Must-Try Food</div>
+          <div class="value" id="modalMustEat"></div>
+        </div>
+      </div>
+      <div class="detail-box" style="margin-top:14px;">
+        <div class="label">📍 Popular Attractions</div>
+        <div class="value" id="modalPopular" style="margin-top:6px;"></div>
+      </div>
+      <div style="margin-top:20px;">
+        <a href="guides.html" class="btn btn-green" style="width:100%; justify-content:center;">Find a Local Guide Here →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD PLACE MODAL -->
+  <div class="modal-overlay" id="addPlaceModal">
+    <div class="modal" style="max-width:560px;">
+      <div class="modal-header">
+        <div>
+          <span style="font-size:28px;">📍</span>
+          <h3>Add a Destination</h3>
+        </div>
+        <button class="modal-close" onclick="closeModal('addPlaceModal')">✕</button>
+      </div>
+      <form id="addPlaceForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>City / Place Name *</label>
+            <input type="text" id="pName" placeholder="e.g. Bali">
+          </div>
+          <div class="form-group">
+            <label>Country *</label>
+            <input type="text" id="pCountry" placeholder="e.g. Indonesia">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Continent</label>
+          <select id="pContinent">
+            <option>Asia</option>
+            <option>Europe</option>
+            <option>Africa</option>
+            <option>Americas</option>
+            <option>Oceania</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description *</label>
+          <textarea id="pDescription" placeholder="What makes this place special?"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Local Language(s)</label>
+            <input type="text" id="pLanguage" placeholder="e.g. Balinese, Indonesian">
+          </div>
+          <div class="form-group">
+            <label>Currency</label>
+            <input type="text" id="pCurrency" placeholder="e.g. IDR (Rp)">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Best Time to Visit</label>
+          <input type="text" id="pBestTime" placeholder="e.g. Apr – Oct">
+        </div>
+        <div class="form-group">
+          <label>Must-Try Foods</label>
+          <input type="text" id="pMustEat" placeholder="e.g. Nasi Goreng, Satay, Babi Guling">
+        </div>
+        <div class="form-group">
+          <label>Popular Attractions</label>
+          <input type="text" id="pPopular" placeholder="e.g. Uluwatu Temple, Ubud, Tanah Lot">
+        </div>
+        <div class="form-group">
+          <label>Image URL (optional)</label>
+          <input type="text" id="pImage" placeholder="https://...">
+        </div>
+        <button type="button" class="btn btn-green" onclick="addPlace()" style="width:100%; justify-content:center; margin-top:8px;">Add Destination</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOURIST MODAL (shared) -->
+  <div class="modal-overlay" id="touristModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div><span style="font-size:28px;">✈️</span><h3>Register as Tourist</h3></div>
+        <button class="modal-close" onclick="closeModal('touristModal')">✕</button>
+      </div>
+      <form id="touristRegForm">
+        <div class="form-row">
+          <div class="form-group"><label>Full Name *</label><input type="text" id="tName" placeholder="Your name"></div>
+          <div class="form-group"><label>Email *</label><input type="email" id="tEmail" placeholder="your@email.com"></div>
+        </div>
+        <div class="form-group"><label>Your Country *</label><input type="text" id="tCountry" placeholder="Where are you from?"></div>
+        <div class="form-group"><label>Travel Interests</label><input type="text" id="tInterests" placeholder="e.g. Food, Heritage, Adventure"></div>
+        <button type="button" class="btn btn-green" onclick="registerTourist()" style="width:100%; justify-content:center; margin-top:8px;">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- GUIDE MODAL (shared) -->
+  <div class="modal-overlay" id="guideModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div><span style="font-size:28px;">🧭</span><h3>Register as Guide</h3></div>
+        <button class="modal-close" onclick="closeModal('guideModal')">✕</button>
+      </div>
+      <form id="guideRegForm">
+        <div class="form-row">
+          <div class="form-group"><label>Full Name *</label><input type="text" id="gName" placeholder="Your name"></div>
+          <div class="form-group"><label>Location *</label><input type="text" id="gLocation" placeholder="City, Country"></div>
+        </div>
+        <div class="form-group"><label>Languages Spoken *</label><input type="text" id="gLanguages" placeholder="English, Hindi, French ..."></div>
+        <div class="form-group"><label>Speciality *</label><input type="text" id="gSpeciality" placeholder="e.g. Food Tours, Heritage, Adventure"></div>
+        <div class="form-group"><label>Years of Experience</label><input type="text" id="gExperience" placeholder="e.g. 5 years"></div>
+        <div class="form-group"><label>About You</label><textarea id="gBio" placeholder="Tell tourists about yourself..."></textarea></div>
+        <button type="button" class="btn btn-green" onclick="registerGuide()" style="width:100%; justify-content:center; margin-top:8px;">Join as Guide</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <span class="footer-logo">Local<span>Guide</span></span>
+        <p>Connecting curious travelers with passionate local guides worldwide.</p>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/satyamchy21"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/satyam100/"><i class="fab fa-linkedin"></i></a>
+          <a href="https://discord.com/users/satyam_bot"><i class="fab fa-discord"></i></a>
+          <a href="https://www.youtube.com/@mathologico?si=n99-9lrDobxK70Ww"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="places.html">Destinations</a>
+        <a href="guides.html">Local Guides</a>
+        <a href="services.html">Our Services</a>
+        <a href="about.html">About Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Join Us</h4>
+        <a href="#" onclick="openModal('touristModal')">Register as Tourist</a>
+        <a href="#" onclick="openModal('guideModal')">Become a Guide</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>📧 hello@localguide.com</p>
+        <p>📍 Mumbai, India</p>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 LocalGuide | Discover • Connect • Explore</p></div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+  <script>
+    let currentFilter = "All";
+
+    function renderPlaces(filter) {
+      if (filter) currentFilter = filter;
+      let search = (document.getElementById("searchInput").value || "").toLowerCase();
+      let grid = document.getElementById("placesGrid");
+      grid.innerHTML = "";
+
+      let filtered = places.filter(function(p) {
+        let matchFilter = currentFilter === "All" || p.continent === currentFilter;
+        let matchSearch = !search || p.name.toLowerCase().includes(search) || p.country.toLowerCase().includes(search);
+        return matchFilter && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<p style="color:var(--muted); text-align:center; grid-column:1/-1; padding:40px 0;">No destinations found. Try a different search or add one!</p>';
+        return;
+      }
+
+      filtered.forEach(function(p, i) {
+        grid.innerHTML += `
+          <div class="card place-card" onclick="showPlaceDetail(${places.indexOf(p)})">
+            <div class="card-img-wrap">
+              <img src="${p.image}" alt="${p.name}">
+              <span class="place-badge">${p.flag} ${p.continent}</span>
+            </div>
+            <div class="card-body">
+              <span class="card-tag">${p.country}</span>
+              <h3>${p.name}</h3>
+              <p>${p.description.substring(0, 90)}...</p>
+              <div class="card-meta">
+                <span>🗣️ ${p.language || "—"}</span>
+                <span>☀️ ${p.bestTime || "—"}</span>
+              </div>
+            </div>
+          </div>`;
+      });
+    }
+
+    function filterSearch() {
+      renderPlaces(currentFilter);
+    }
+
+    function showPlaceDetail(index) {
+      let p = places[index];
+      document.getElementById("modalPlaceName").textContent = p.flag + " " + p.name + ", " + p.country;
+      document.getElementById("modalPlaceImg").src = p.image;
+      document.getElementById("modalPlaceDesc").textContent = p.description;
+      document.getElementById("modalLang").textContent = p.language || "—";
+      document.getElementById("modalCurrency").textContent = p.currency || "—";
+      document.getElementById("modalBestTime").textContent = p.bestTime || "—";
+      document.getElementById("modalMustEat").textContent = p.mustEat || "—";
+      document.getElementById("modalPopular").textContent = p.popular || "—";
+      openModal("placeDetailModal");
+    }
+
+    // Init filter tabs
+    let tabs = document.querySelectorAll(".filter-tab");
+    tabs.forEach(function(tab) {
+      tab.addEventListener("click", function() {
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        renderPlaces(tab.dataset.filter);
+      });
+    });
+
+    renderPlaces("All");
+  </script>
+</body>
+</html>
