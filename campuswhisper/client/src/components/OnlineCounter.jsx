@@ -1,6 +1,3 @@
-import { useEffect, useRef } from 'react'
-import { motion, useSpring, useTransform } from 'framer-motion'
-
 export default function OnlineCounter({ count, label = 'online' }) {
   return (
     <div

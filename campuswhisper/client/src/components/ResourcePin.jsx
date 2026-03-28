@@ -67,6 +67,7 @@ export default function ResourcePin({ roomId, session }) {
         url: form.url.trim(),
         tag: form.tag,
         sessionToken: session.sessionToken,
+        pinnedBy: session.sessionToken,
         handle: session.handle,
       })
       setForm({ title: '', url: '', tag: 'notes' })
