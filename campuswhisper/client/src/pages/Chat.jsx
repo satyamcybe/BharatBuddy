@@ -193,17 +193,6 @@ export default function Chat() {
     [emitTypingStart],
   )
 
-  const handleKeyDown = useCallback(
-    (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault()
-        sendMessage()
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [input, codeMode, language, isSOS, session, roomId],
-  )
-
   const sendMessage = useCallback(() => {
     if (!input.trim() || !session) return
     const payload = {
@@ -225,6 +214,16 @@ export default function Chat() {
     socket.emit('typing_stop', { roomId, handle: session.handle })
     textareaRef.current?.focus()
   }, [input, session, roomId, codeMode, language, isSOS])
+
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault()
+        sendMessage()
+      }
+    },
+    [sendMessage],
+  )
 
   const handleShip = useCallback(() => {
     if (!input.trim() || !session || shipDisabled) return

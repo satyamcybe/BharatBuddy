@@ -38,11 +38,13 @@ module.exports = (io, socket) => {
       socket.data.branch = branch;
       socket.data.mood = mood;
 
-      const [messages, onlineCount] = await Promise.all([
+      const [messagesResult, onlineCountResult] = await Promise.allSettled([
         messageStore.getMessages(roomId),
         messageStore.getOnlineCount(roomId),
       ]);
 
+      const messages = messagesResult.status === 'fulfilled' ? messagesResult.value : [];
+      const onlineCount = onlineCountResult.status === 'fulfilled' ? onlineCountResult.value : 0;
       const dominantMood = getDominantMood(messages);
 
       socket.emit('room_joined', { messages, onlineCount, dominantMood });

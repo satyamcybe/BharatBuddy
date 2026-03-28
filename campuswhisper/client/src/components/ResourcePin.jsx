@@ -66,7 +66,6 @@ export default function ResourcePin({ roomId, session }) {
         title: form.title.trim(),
         url: form.url.trim(),
         tag: form.tag,
-        sessionToken: session.sessionToken,
         pinnedBy: session.sessionToken,
         handle: session.handle,
       })

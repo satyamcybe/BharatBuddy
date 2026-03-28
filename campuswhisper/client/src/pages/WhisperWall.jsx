@@ -46,9 +46,9 @@ export default function WhisperWall() {
   useEffect(() => {
     socket.connect()
 
-    const handleHistory = (history) => {
-      if (!Array.isArray(history)) return
-      setWhispers(history.slice(-20).map((w) => ({ ...w, _uid: idRef.current++ })))
+    const handleHistory = ({ whispers: list } = {}) => {
+      if (!Array.isArray(list)) return
+      setWhispers(list.slice(-20).map((w) => ({ ...w, _uid: idRef.current++ })))
     }
 
     const handleNew = (whisper) => {
