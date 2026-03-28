@@ -4,7 +4,7 @@ module.exports = (io, socket) => {
   /**
    * sos_help — join the dedicated SOS room and receive its message history.
    */
-  socket.on('sos_help', async ({ roomId } = {}) => {
+  socket.on('sos_help', async () => {
     try {
       socket.join('sos');
 

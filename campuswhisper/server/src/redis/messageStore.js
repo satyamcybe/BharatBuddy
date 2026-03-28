@@ -138,10 +138,26 @@ async function getOnlineCount(roomId) {
 }
 
 /**
+ * Collect all keys matching a pattern using SCAN (non-blocking).
+ * @param {string} pattern
+ * @returns {Promise<string[]>}
+ */
+async function scanKeys(pattern) {
+  const keys = [];
+  let cursor = '0';
+  do {
+    const [nextCursor, batch] = await redis.scan(cursor, 'MATCH', pattern, 'COUNT', 100);
+    cursor = nextCursor;
+    keys.push(...batch);
+  } while (cursor !== '0');
+  return keys;
+}
+
+/**
  * Get the total number of online users across all rooms.
  */
 async function getTotalOnline() {
-  const keys = await redis.keys('online:*');
+  const keys = await scanKeys('online:*');
   if (keys.length === 0) return 0;
   const counts = await Promise.all(keys.map((key) => redis.scard(key)));
   return counts.reduce((sum, c) => sum + c, 0);
@@ -151,7 +167,7 @@ async function getTotalOnline() {
  * Get an array of { roomId, count } for every room that has online users.
  */
 async function getOnlineRooms() {
-  const keys = await redis.keys('online:*');
+  const keys = await scanKeys('online:*');
   if (keys.length === 0) return [];
   const results = await Promise.all(
     keys.map(async (key) => {
