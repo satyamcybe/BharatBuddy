@@ -157,7 +157,10 @@ function toggleMobileNav() {
   let btn = document.getElementById("navToggle");
   if (!nav) return;
   let isOpen = nav.classList.toggle("nav-open");
-  if (btn) btn.textContent = isOpen ? "✕" : "☰";
+  if (btn) {
+    btn.textContent = isOpen ? "✕" : "☰";
+    btn.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  }
 }
 
 // Close mobile nav when a link is clicked
