@@ -151,6 +151,26 @@ document.addEventListener("click", function(e) {
 });
 
 
+/* ===== MOBILE NAV TOGGLE ===== */
+function toggleMobileNav() {
+  let nav = document.querySelector("header nav");
+  let btn = document.getElementById("navToggle");
+  if (!nav) return;
+  let isOpen = nav.classList.toggle("nav-open");
+  if (btn) btn.textContent = isOpen ? "✕" : "☰";
+}
+
+// Close mobile nav when a link is clicked
+document.addEventListener("click", function(e) {
+  if (e.target.closest("header nav") && e.target.tagName === "A") {
+    let nav = document.querySelector("header nav");
+    let btn = document.getElementById("navToggle");
+    if (nav) nav.classList.remove("nav-open");
+    if (btn) btn.textContent = "☰";
+  }
+});
+
+
 /* ===== GUIDE REGISTRATION ===== */
 function registerGuide() {
   let name = document.getElementById("gName").value.trim();
