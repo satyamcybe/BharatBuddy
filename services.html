@@ -24,10 +24,11 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <div style="display:flex; gap:10px;">
+    <div class="header-actions">
       <button class="btn btn-outline" style="background:var(--green-pale); color:var(--green); border:none;" onclick="openModal('touristModal')">I'm a Tourist</button>
       <button class="btn btn-green" onclick="openModal('guideModal')">Become a Guide</button>
     </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open navigation" onclick="toggleMobileNav()">☰</button>
   </header>
 
   <section class="page-hero">
